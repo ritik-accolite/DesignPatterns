@@ -1,0 +1,71 @@
+package singleton;
+
+abstract class Vehicle {
+    abstract void drive();
+}
+
+class Car extends Vehicle {
+    @Override
+    void drive() {
+        System.out.println("Driving a car");
+    }
+}
+
+class Motorcycle extends Vehicle {
+    @Override
+    void drive() {
+        System.out.println("Riding a motorcycle");
+    }
+}
+
+interface VehicleFactory {
+    Vehicle createVehicle();
+}
+
+class CarFactory implements VehicleFactory {
+    @Override
+    public Vehicle createVehicle() {
+        return new Car();
+    }
+}
+
+class MotorcycleFactory implements VehicleFactory {
+    @Override
+    public Vehicle createVehicle() {
+        return new Motorcycle();
+    }
+}
+
+public class SingletonFactory {
+    // Singleton instance
+    private static SingletonFactory instance;
+
+    // Private constructor to prevent instantiation from outside
+    private SingletonFactory() {}
+
+    // Method to get the singleton instance
+    public static SingletonFactory getInstance() {
+        if (instance == null) {
+            instance = new SingletonFactory();
+        }
+        return instance;
+    }
+
+    // Method to create a vehicle
+    public Vehicle createVehicle(VehicleFactory factory) {
+        return factory.createVehicle();
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        SingletonFactory factory = SingletonFactory.getInstance();
+
+        VehicleFactory carFactory = new CarFactory();
+        Vehicle car = factory.createVehicle(carFactory);
+        car.drive(); // Output: Driving a car
+
+        VehicleFactory motorcycleFactory = new MotorcycleFactory();
+        Vehicle motorcycle = factory.createVehicle(motorcycleFactory);
+        motorcycle.drive(); // Output: Riding a motorcycle
+    }
+}

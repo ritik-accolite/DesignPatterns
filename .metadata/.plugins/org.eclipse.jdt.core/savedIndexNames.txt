@@ -1,0 +1,4 @@
+INDEX VERSION 1.134+C:\Users\ritik.k_7767\Desktop\Assignments\Design Patterns\.metadata\.plugins\org.eclipse.jdt.core
+32634983.index
+3288147116.index
+1865797976.index
